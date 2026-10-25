@@ -4,10 +4,10 @@
   "license": "Elastic-2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "lint": "eslint",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",
@@ -18,23 +18,24 @@
     "@tiptap/react": "^3.32.0",
     "@tiptap/starter-kit": "^3.32.0",
     "docx": "^9.14.0",
-    "next": "16.4.2",
     "pdfjs-dist": "^6.4.299",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/turbopack": "^4",
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "6.1.2",
     "eslint": "^10",
-    "eslint-config-next": "^16.4.2",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "17.13.0",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "typescript-eslint": "8.71.1",
     "vite": "8.3.4"
   },
   "allowScripts": {
@@ -43,17 +44,6 @@
   },
   "overrides": {
     "braces": "^3.0.3",
-    "eslint-config-next": "^16.4.2",
-    "@next/eslint-plugin-next": "^16.4.2",
-    "eslint-plugin-import": {
-      "eslint": "$eslint"
-    },
-    "eslint-plugin-jsx-a11y": {
-      "eslint": "$eslint"
-    },
-    "eslint-plugin-react": {
-      "eslint": "$eslint"
-    },
     "eslint-plugin-react-hooks": {
       "eslint": "$eslint"
     }

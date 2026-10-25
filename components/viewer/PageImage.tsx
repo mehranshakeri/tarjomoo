@@ -5,7 +5,6 @@ interface Props {
   imageYOffset: number
 }
 
-// eslint-disable-next-line @next/next/no-img-element
 export function PageImage({ img, imageYOffset }: Props) {
   return (
     <img

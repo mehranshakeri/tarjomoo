@@ -19,7 +19,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:5173](http://localhost:5173).
 
 You will need a [Google Gemini API key](https://aistudio.google.com/app/apikey). Enter it via the settings icon in the toolbar — it is stored only in your browser's `localStorage` and never sent anywhere except directly to the Gemini API.
 
@@ -27,19 +27,22 @@ You will need a [Google Gemini API key](https://aistudio.google.com/app/apikey).
 
 | Layer | Library | License |
 |---|---|---|
-| Framework | Next.js 16 | MIT |
+| Build tool | Vite 8 (client-only single-page app) | MIT |
 | UI | React 19, Tailwind CSS 4 | MIT |
 | PDF rendering | pdfjs-dist | Apache-2.0 |
 | OCR | Tesseract.js 7 | Apache-2.0 |
 | Rich text editor | Tiptap 3 | MIT |
 | Word export | docx 9 | MIT |
 | Translation API | Google Gemini (`@google/genai`) | Apache-2.0 |
-| Arabic font | Noto Sans Arabic (via Google Fonts) | OFL-1.1 |
+| Fonts | Geist, Geist Mono, Noto Sans Arabic (self-hosted via Fontsource) | OFL-1.1 |
 
 ## Development
 
+The app runs entirely in the browser — there is no server. `npm run build` produces static files in `dist/` that can be served by any static host.
+
 ```bash
 npm run dev      # start dev server
-npm run build    # production build
-npx tsc --noEmit # type check
+npm run build    # type check + production build into dist/
+npm run preview  # serve the production build locally
+npm run lint     # lint
 ```

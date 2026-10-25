@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import type { OcrExport, TranslatedParagraph, OcrPageData, SanitizedPage, SanitizedBlock, ParagraphMerge } from '@/lib/types'
 import { buildOcrExport, downloadOcrJson } from '@/lib/ocrExport'

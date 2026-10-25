@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import { UploadZone } from '@/components/upload/UploadZone'
 import { ViewerShell } from '@/components/viewer/ViewerShell'

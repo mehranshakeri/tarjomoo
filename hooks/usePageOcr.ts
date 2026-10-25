@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect } from 'react'
 import type { PDFPageProxy } from 'pdfjs-dist'
 import type { PageStatus, TextBlock } from '@/lib/types'

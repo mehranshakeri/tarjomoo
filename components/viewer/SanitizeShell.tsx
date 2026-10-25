@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect, useCallback } from 'react'
 import type { OcrExport, SanitizedPage } from '@/lib/types'
 import { sanitizePage, type SanitizeOptions, DEFAULT_SANITIZE_OPTIONS } from '@/lib/sanitize'

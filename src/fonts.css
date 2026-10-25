@@ -1,0 +1,12 @@
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+@import '@fontsource/noto-sans-arabic/400.css';
+@import '@fontsource/noto-sans-arabic/500.css';
+@import '@fontsource/noto-sans-arabic/600.css';
+
+/* Font stacks used by components directly and mapped into the Tailwind theme in globals.css. */
+:root {
+  --font-geist-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-geist-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-arabic: 'Noto Sans Arabic', Tahoma, sans-serif;
+}

@@ -1,5 +1,3 @@
-'use client'
-
 import { useMemo } from 'react'
 import type { PDFPageProxy } from 'pdfjs-dist'
 import { OcrPage } from './OcrPage'

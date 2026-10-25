@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PDF Viewer &amp; OCR</title>
+    <meta name="description" content="View PDFs and extract text with OCR — works with scanned documents" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+  </head>
+  <body class="min-h-full flex flex-col">
+    <!-- display: contents keeps the app a direct flex child of <body>, as it was under Next.js -->
+    <div id="root" class="contents"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

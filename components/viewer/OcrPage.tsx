@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect, useMemo } from 'react'
 import type { PDFPageProxy } from 'pdfjs-dist'
 import { usePageOcr } from '@/hooks/usePageOcr'

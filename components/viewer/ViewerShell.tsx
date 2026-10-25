@@ -1,5 +1,3 @@
-'use client'
-
 import { useRef, useState, useCallback, useEffect } from 'react'
 import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist'
 import { PdfPanel } from './PdfPanel'

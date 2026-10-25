@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect } from 'react'
 import type { PDFDocumentProxy } from 'pdfjs-dist'
 import { loadPdf } from '@/lib/pdfLoader'

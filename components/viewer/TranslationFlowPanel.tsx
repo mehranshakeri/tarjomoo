@@ -1,5 +1,3 @@
-'use client'
-
 import type { OcrPageData, SanitizedPage, TranslatedParagraph } from '@/lib/types'
 import { TranslationEditor } from './TranslationEditor'
 import { SanitizedImageBlock } from './SanitizedImageBlock'

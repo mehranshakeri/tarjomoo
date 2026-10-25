@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useRef, useMemo } from 'react'
 import type { OcrPageData } from '@/lib/types'
 import { detectNoise, applyNoiseOverrides, type SanitizeOptions } from '@/lib/sanitize'

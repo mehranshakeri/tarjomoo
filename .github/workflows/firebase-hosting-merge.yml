@@ -10,7 +10,8 @@ on:
       - '**/*.md'
       - 'docs/**'
       - 'LICENSE'
-      - '.gitignore'jobs:
+      - '.gitignore'
+jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:

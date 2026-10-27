@@ -1,27 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useLocalStorageValue } from './useLocalStorageValue'
 
 const STORAGE_KEY = 'glossary'
 
 export function useGlossary() {
-  const [text, setText] = useState('')
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (stored) setText(stored)
-    } catch {
-      // ignore
-    }
-  }, [])
-
-  function save(value: string) {
-    setText(value)
-    try {
-      localStorage.setItem(STORAGE_KEY, value)
-    } catch {
-      // ignore
-    }
-  }
-
+  const [text, save] = useLocalStorageValue(STORAGE_KEY)
   return { text, save }
 }

@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from 'react'
+import { glossaryFormatHint, glossaryPlaceholder } from '@/lib/glossaryExamples'
 
 interface Props {
   initialText: string
   dir: 'rtl' | 'ltr'
+  sourceLang: string
+  targetLang: string
   onClose: (text: string) => void
 }
 
-export function GlossaryPanel({ initialText, dir, onClose }: Props) {
+export function GlossaryPanel({ initialText, dir, sourceLang, targetLang, onClose }: Props) {
   const [text, setText] = useState(initialText)
   const [copied, setCopied] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -77,7 +80,7 @@ export function GlossaryPanel({ initialText, dir, onClose }: Props) {
 
         {/* Format hint */}
         <p className="px-4 pt-3 pb-1 text-xs text-foreground/40">
-          One term per line: <code className="font-mono">Original:Translation</code>
+          One term per line: <code className="font-mono">{glossaryFormatHint(sourceLang, targetLang)}</code>
         </p>
 
         {/* Textarea */}
@@ -85,7 +88,7 @@ export function GlossaryPanel({ initialText, dir, onClose }: Props) {
           ref={textareaRef}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder={'hello:سلام\nAPI:رابط برنامه‌نویسی'}
+          placeholder={glossaryPlaceholder(sourceLang, targetLang)}
           className={`flex-1 resize-none px-4 py-3 text-sm text-foreground bg-transparent outline-none placeholder:text-foreground/20${dir === 'rtl' ? ' [font-family:var(--font-arabic)]' : ' font-mono'}`}
           spellCheck={false}
         />

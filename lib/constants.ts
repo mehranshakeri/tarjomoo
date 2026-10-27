@@ -5,3 +5,9 @@ export const TEXT_SCALE = 1.44
 // Converts imageYLines (UI slider, in lines of 12pt text on an A4 page) to a
 // normalized Y offset (fraction of page height).
 export const IMAGE_Y_LINES_TO_OFFSET = 12 / 842
+
+export const RTL_LANGS = new Set([
+  'Persian/Farsi', 'Arabic', 'Hebrew', 'Urdu',
+  'Pashto, Pushto', 'Sindhi', 'Kashmiri', 'Uyghur', 'Uighur, Uyghur',
+  'Kurdish', 'Yiddish', 'Divehi, Dhivehi, Maldivian', 'Thaana',
+])

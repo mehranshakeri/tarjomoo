@@ -6,6 +6,9 @@ import { PageLoadingSpinner } from './PageLoadingSpinner'
 import { SanitizeOcrPanel } from './SanitizeOcrPanel'
 import { SanitizePreviewPanel } from './SanitizePreviewPanel'
 import { PhaseBar } from '@/components/PhaseBar'
+import { HeaderTools } from '@/components/HeaderTools'
+import { GeminiSettings } from '@/components/GeminiSettings'
+import { useGeminiKey } from '@/hooks/useGeminiKey'
 
 interface Props {
   ocrData: OcrExport
@@ -18,6 +21,8 @@ export function SanitizeShell({ ocrData, onComplete }: Props) {
   const [currentPageIndex, setCurrentPageIndex] = useState(0)
   const [completing, setCompleting] = useState(false)
   const [completedCount, setCompletedCount] = useState(0)
+  const [showSettings, setShowSettings] = useState(false)
+  const { apiKey, setApiKey } = useGeminiKey()
   const [noiseOptions, setNoiseOptions] = useState<SanitizeOptions>(DEFAULT_SANITIZE_OPTIONS)
 
   const imageYOffset = ocrData.imageYLines * IMAGE_Y_LINES_TO_OFFSET
@@ -119,12 +124,15 @@ export function SanitizeShell({ ocrData, onComplete }: Props) {
         <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none">
           <PhaseBar activeStep={1} />
         </div>
-        <button
-          onClick={handleContinue}
-          className="text-xs px-3 py-1.5 bg-foreground text-background rounded hover:opacity-80 transition-opacity font-medium"
-        >
-          Continue to Translate →
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleContinue}
+            className="text-xs px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors font-medium"
+          >
+            Continue to Translate →
+          </button>
+          <HeaderTools apiKey={apiKey} onOpenSettings={() => setShowSettings(true)} />
+        </div>
       </header>
 
       {/* Split panels */}
@@ -158,7 +166,7 @@ export function SanitizeShell({ ocrData, onComplete }: Props) {
 
       {/* Hint bar */}
       <div className="shrink-0 flex justify-center py-2.5 border-t border-foreground/5">
-        <span className="px-4 py-1.5 rounded-full border border-amber-300/50 bg-amber-100/40 text-sm text-amber-800/70">
+        <span className="px-4 py-1.5 rounded-lg border border-amber-300/50 bg-amber-100/40 text-sm text-amber-800/70">
           <strong>Shift+Click</strong> any text on the left to toggle noise removal.
         </span>
       </div>
@@ -168,6 +176,15 @@ export function SanitizeShell({ ocrData, onComplete }: Props) {
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-30">
           <PageLoadingSpinner label={`Sanitizing… ${completedCount} / ${pages.length} pages`} />
         </div>
+      )}
+
+      {showSettings && (
+        <GeminiSettings
+          apiKey={apiKey}
+          onSave={(key) => { setApiKey(key); setShowSettings(false) }}
+          onDelete={() => setApiKey('')}
+          onClose={() => setShowSettings(false)}
+        />
       )}
     </div>
   )

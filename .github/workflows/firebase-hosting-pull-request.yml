@@ -13,8 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      # The job always runs (so the required check reports), but build/deploy
+      # are skipped when only documentation files changed.
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          predicate-quantifier: every
+          filters: |
+            code:
+              - '**'
+              - '!**/*.md'
+              - '!docs/**'
+              - '!LICENSE'
+              - '!.gitignore'
+      - if: steps.changes.outputs.code == 'true'
+        run: npm ci && npm run build
+      - if: steps.changes.outputs.code == 'true'
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TARJOMOO }}

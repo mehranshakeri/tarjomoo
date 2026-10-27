@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
+import { useLocalStorageValue } from './useLocalStorageValue'
 
 const STORAGE_KEY = 'translation_params'
 
@@ -19,22 +20,19 @@ export function hasStoredParams(): boolean {
 }
 
 export function useTranslationParams() {
-  const [params, setParamsState] = useState<TranslationParams>(DEFAULTS)
+  const [stored, setStored] = useLocalStorageValue(STORAGE_KEY)
 
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      try {
-        setParamsState({ ...DEFAULTS, ...JSON.parse(stored) })
-      } catch {
-        // ignore malformed stored value
-      }
+  const params = useMemo<TranslationParams>(() => {
+    if (!stored) return DEFAULTS
+    try {
+      return { ...DEFAULTS, ...JSON.parse(stored) }
+    } catch {
+      return DEFAULTS
     }
-  }, [])
+  }, [stored])
 
   function setParams(next: TranslationParams) {
-    setParamsState(next)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+    setStored(JSON.stringify(next))
   }
 
   return { params, setParams }

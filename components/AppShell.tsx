@@ -6,18 +6,24 @@ import { usePdfDocument } from '@/hooks/usePdfDocument'
 import { PageLoadingSpinner } from '@/components/viewer/PageLoadingSpinner'
 import { terminateWorker } from '@/lib/ocrEngine'
 import { parseOcrJson } from '@/lib/ocrExport'
+import { TranslationParamsModal } from '@/components/TranslationParamsModal'
+import { useTranslationParams } from '@/hooks/useTranslationParams'
+import { GeminiSettings } from '@/components/GeminiSettings'
+import { useGeminiKey } from '@/hooks/useGeminiKey'
 import { SanitizeShell } from '@/components/viewer/SanitizeShell'
 import type { OcrExport, SanitizedPage } from '@/lib/types'
 import type { TranslationParams } from '@/hooks/useTranslationParams'
 
 type AppState =
   | { mode: 'idle' }
+  | { mode: 'params'; file: File }
   | { mode: 'pdf'; file: File }
   | { mode: 'sanitize'; data: OcrExport; params: TranslationParams }
   | { mode: 'translate'; data: OcrExport; params: TranslationParams; sanitizedPages: Map<number, SanitizedPage> }
   | { mode: 'json-error'; message: string }
 
-export function AppShell() {
+function AppContent() {
+  const { params, setParams } = useTranslationParams()
   const [state, setState] = useState<AppState>({ mode: 'idle' })
 
   const pdfFile = state.mode === 'pdf' ? state.file : null
@@ -30,7 +36,7 @@ export function AppShell() {
 
   function handleFile(file: File) {
     if (file.type === 'application/pdf') {
-      setState({ mode: 'pdf', file })
+      setState({ mode: 'params', file })
       return
     }
     const reader = new FileReader()
@@ -51,6 +57,16 @@ export function AppShell() {
 
   if (state.mode === 'idle') {
     return <UploadZone onFile={handleFile} />
+  }
+
+  if (state.mode === 'params') {
+    return (
+      <TranslationParamsModal
+        params={params}
+        onConfirm={(next) => { setParams(next); setState({ mode: 'pdf', file: state.file }) }}
+        onClose={handleReset}
+      />
+    )
   }
 
   if (state.mode === 'json-error') {
@@ -106,5 +122,24 @@ export function AppShell() {
       onReset={handleReset}
       onAdvance={handleAdvance}
     />
+  )
+}
+
+export function AppShell() {
+  const { apiKey, setApiKey } = useGeminiKey()
+  const [showSettings, setShowSettings] = useState(!apiKey)
+
+  return (
+    <>
+      <AppContent />
+      {showSettings && (
+        <GeminiSettings
+          apiKey={apiKey}
+          onSave={(key) => { setApiKey(key); setShowSettings(false) }}
+          onDelete={() => setApiKey('')}
+          onClose={() => setShowSettings(false)}
+        />
+      )}
+    </>
   )
 }

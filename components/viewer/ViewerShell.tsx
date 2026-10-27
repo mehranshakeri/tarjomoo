@@ -7,6 +7,7 @@ import { buildOcrExport, downloadOcrJson } from '@/lib/ocrExport'
 import { IMAGE_Y_LINES_TO_OFFSET } from '@/lib/constants'
 import { syncScrollPanels } from '@/lib/scrollSync'
 import { useGeminiKey } from '@/hooks/useGeminiKey'
+import { HeaderTools } from '@/components/HeaderTools'
 import { GeminiSettings } from '@/components/GeminiSettings'
 import { useTranslationParams, hasStoredParams } from '@/hooks/useTranslationParams'
 import { TranslationParamsModal } from '@/components/TranslationParamsModal'
@@ -218,27 +219,19 @@ export function ViewerShell({ pdfDoc, fileName, onReset, onAdvance }: Props) {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setShowParams(true)}
-            className="flex items-center gap-1.5 text-xs text-foreground/50 bg-foreground/5 hover:bg-foreground/10 rounded-full px-3 py-1 transition-colors"
-            title="Edit translation settings"
-          >
-            <span>{params.sourceLang}</span>
-            <span className="text-foreground/30">→</span>
-            <span>{params.targetLang}</span>
-          </button>
-          <button
             onClick={handleAdvance}
-            className="text-xs px-3 py-1.5 bg-foreground text-background rounded hover:opacity-80 transition-opacity font-medium"
+            className="text-xs px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors font-medium"
           >
             Sanitize →
           </button>
           <button
             onClick={handleDownload}
-            className="text-xs text-foreground/50 hover:text-foreground transition-colors px-2 py-1 rounded border border-foreground/15 hover:border-foreground/30"
+            className="hidden text-xs text-foreground/50 hover:text-foreground transition-colors px-2 py-1 rounded border border-foreground/15 hover:border-foreground/30"
           >
             Save JSON
           </button>
           <span className="text-xs text-foreground/40">{total} page{total !== 1 ? 's' : ''}</span>
+          <HeaderTools apiKey={apiKey} onOpenSettings={() => setShowSettings(true)} />
         </div>
       </header>
 

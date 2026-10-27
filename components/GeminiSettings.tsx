@@ -48,8 +48,7 @@ export function GeminiSettings({ apiKey, onSave, onDelete, onClose }: Props) {
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div className="bg-white rounded-xl shadow-2xl p-8 w-96 flex flex-col gap-5">
-        <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold text-foreground">Translation settings</h2>
+        <div className="flex items-center justify-end">
           <button
             onClick={onClose}
             className="text-foreground/40 hover:text-foreground transition-colors text-lg leading-none"
@@ -103,7 +102,7 @@ export function GeminiSettings({ apiKey, onSave, onDelete, onClose }: Props) {
             </p>
           )}
 
-          <p className="text-xs text-foreground/40 mt-1">
+          <p className="text-xs font-semibold text-[#5B2D8E] mt-1">
             Your key is stored locally in your browser and never sent to our servers.
           </p>
         </div>

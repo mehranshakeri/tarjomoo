@@ -25,7 +25,8 @@ jobs:
               - '!**/*.md'
               - '!docs/**'
               - '!LICENSE'
-              - '!.gitignore'      - if: steps.changes.outputs.code == 'true'
+              - '!.gitignore'
+      - if: steps.changes.outputs.code == 'true'
         run: npm ci && npm run build
       - if: steps.changes.outputs.code == 'true'
         uses: FirebaseExtended/action-hosting-deploy@v0

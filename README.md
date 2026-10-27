@@ -1,6 +1,6 @@
 # tarjomoo
 
-https://tarjomoo.com/
+[Tarjomoo](https://tarjomoo.com)
 
 A browser-based PDF translation tool. Upload a PDF, review the OCR output, sanitize noise, then select paragraphs to translate using the Gemini API.
 

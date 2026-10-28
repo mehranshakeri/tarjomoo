@@ -35,17 +35,8 @@ export function ViewerShell({ pdfDoc, fileName, onReset, onAdvance }: Props) {
   const [pendingAction, setPendingAction] = useState<'advance' | 'download' | null>(null)
   const [showSettings, setShowSettings] = useState(false)
   const [showParams, setShowParams] = useState(false)
-  const [advanceAfterKey, setAdvanceAfterKey] = useState(false)
   const { apiKey, setApiKey } = useGeminiKey()
   const { params, setParams } = useTranslationParams()
-
-  useEffect(() => {
-    if (!advanceAfterKey || !apiKey) return
-    setAdvanceAfterKey(false)
-    if (hasStoredParams()) { handleParamsConfirm(params); return }
-    setShowParams(true)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [advanceAfterKey, apiKey])
 
   const pageDataMapRef = useRef<Map<number, OcrPageData>>(new Map())
   const leftRef = useRef<HTMLDivElement>(null)
@@ -113,7 +104,6 @@ export function ViewerShell({ pdfDoc, fileName, onReset, onAdvance }: Props) {
   }
 
   function handleAdvance() {
-    if (!apiKey) { setShowSettings(true); return }
     if (hasStoredParams()) { handleParamsConfirm(params); return }
     setShowParams(true)
   }
@@ -267,7 +257,7 @@ export function ViewerShell({ pdfDoc, fileName, onReset, onAdvance }: Props) {
       {showSettings && (
         <GeminiSettings
           apiKey={apiKey}
-          onSave={(key) => { setApiKey(key); setShowSettings(false); if (key) setAdvanceAfterKey(true) }}
+          onSave={(key) => { setApiKey(key); setShowSettings(false) }}
           onDelete={() => setApiKey('')}
           onClose={() => setShowSettings(false)}
         />

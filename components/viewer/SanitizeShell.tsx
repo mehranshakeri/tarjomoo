@@ -60,6 +60,11 @@ export function SanitizeShell({ ocrData, onComplete }: Props) {
   }, [])
 
   function handleContinue() {
+    if (!apiKey) { setShowSettings(true); return }
+    finishSanitizing()
+  }
+
+  function finishSanitizing() {
     const missing = pages.filter((p) => !sanitizedPages.has(p.pageIndex))
     if (missing.length === 0) {
       onComplete(sanitizedPages)
@@ -181,7 +186,7 @@ export function SanitizeShell({ ocrData, onComplete }: Props) {
       {showSettings && (
         <GeminiSettings
           apiKey={apiKey}
-          onSave={(key) => { setApiKey(key); setShowSettings(false) }}
+          onSave={(key) => { setApiKey(key); setShowSettings(false); if (key) finishSanitizing() }}
           onDelete={() => setApiKey('')}
           onClose={() => setShowSettings(false)}
         />

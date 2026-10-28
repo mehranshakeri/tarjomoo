@@ -20,10 +20,10 @@ export function UploadZone({ onFile }: Props) {
     <div className="min-h-screen flex items-center justify-center bg-background p-8">
       <div className="w-full max-w-xl">
         <h1 className="text-3xl font-semibold text-foreground mb-2 text-center">
-          PDF Viewer & OCR
+          Start with uploading your PDF
         </h1>
         <p className="text-center text-sm text-foreground/60 mb-8">
-          Upload a PDF to view it alongside extracted text — or drop a saved OCR JSON to restore a session.
+          Upload a PDF to view it alongside extracted text.
         </p>
 
         <div
@@ -66,12 +66,12 @@ export function UploadZone({ onFile }: Props) {
 
           <div className="text-center">
             <p className="font-medium text-foreground">
-              {dragging ? 'Drop your file here' : 'Drag & drop your file here'}
+              {dragging ? 'Drop your PDF here' : 'Drag & drop your file here'}
             </p>
             <p className="text-sm text-foreground/50 mt-1">or click to browse</p>
           </div>
 
-          <span className="text-xs text-foreground/30 uppercase tracking-wider">PDF or OCR JSON</span>
+          <span className="text-xs text-foreground/30 uppercase tracking-wider">PDF</span>
         </div>
 
         <input
